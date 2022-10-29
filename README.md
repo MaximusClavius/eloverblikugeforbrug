@@ -10,5 +10,12 @@ For mere historik på diagrammet ændres "graph_span", fx 10d. Af ukendte årsag
 
 ![image](https://user-images.githubusercontent.com/103023823/187018251-da6fd6f2-322e-4ede-8aa0-4568d53544d7.png)
 
-PS
+Bemærk!
 Til tider passer datoen ikke, og det sker når sensor ikke er blevet opdateret. Umiddelbart skyldes det integrationens opdatering af sensor.eloverblik_energy_total.
+En løsning på dette er:
+1) at lave en SQL integration
+2) at lave en data_generator på apexcharts-card
+
+Ad 1)<br>
+select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id) b;
+og husk at angive "state" for "Column"
