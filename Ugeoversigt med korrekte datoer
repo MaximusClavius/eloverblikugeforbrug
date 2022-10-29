@@ -1,0 +1,45 @@
+type: custom:apexcharts-card
+apex_config:
+  chart:
+    height: 140%
+  dataLabels:
+    background:
+      enabled: false
+    style:
+      colors:
+        - var(--primary-text-color)
+graph_span: 8d1s
+span:
+  end: day
+header:
+  show: true
+  title: Daglig strømforbrug for seneste uge
+experimental:
+  color_threshold: true
+yaxis:
+  - id: left
+    min: ~0
+    apex_config:
+      forceNiceScale: true
+series:
+  - entity: sensor.eloverblik_historik
+    type: column
+    data_generator: |
+      var new_data = entity.attributes.Data.split(',');
+      var hist = new_data.map((start) => {
+        var element = start.split(': ');
+        return [new Date(element[0]).getTime(), parseFloat(element[1])];
+      });
+      return hist;
+    float_precision: 2
+    show:
+      datalabels: true
+    color_threshold:
+      - color: '#e45e65'
+        value: 12
+      - color: '#e0b400'
+        value: 8
+      - color: '#0da035'
+        value: 4
+card_mod:
+  class: top-level-chart
