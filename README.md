@@ -12,8 +12,7 @@ For mere historik på diagrammet ændres "graph_span", fx 10d. Af ukendte årsag
 ![image](https://user-images.githubusercontent.com/103023823/187018251-da6fd6f2-322e-4ede-8aa0-4568d53544d7.png)
 
 ## Den korrekte løsning
-Til tider passer datoen ikke, og det sker når sensor ikke er blevet opdateret. Umiddelbart skyldes det integrationens opdatering af sensor.eloverblik_energy_total.
-En løsning på dette er:
+Datoen passer ikke, og det skyldes at HA bruger last_updated fremfor den korrekt metering_date på sensor.eloverblik_energy_total. Får at få fandt på den korrekt dato(metering_date), så er en løsning på dette:
 1) at lave en SQL integration
 2) at lave en data_generator på apexcharts-card
 <p>Ad 1)<br>
