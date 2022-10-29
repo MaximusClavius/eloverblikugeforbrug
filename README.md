@@ -16,7 +16,6 @@ Til tider passer datoen ikke, og det sker når sensor ikke er blevet opdateret. 
 En løsning på dette er:
 1) at lave en SQL integration
 2) at lave en data_generator på apexcharts-card
-
-Ad 1)<br>
-<p>select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id) b;</p>
+<p>Ad 1)<br>
+select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id) b;</p>
 <i>og husk at angive "state" for "Column"</i>
