@@ -28,4 +28,5 @@ select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT
         return [new Date(element[0]).getTime(), parseFloat(element[1])];<br>
       });<br>
       return hist;<br>
+Et komplet eksempel og formateret korrekt findes her: 
 </p>
