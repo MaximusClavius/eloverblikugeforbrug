@@ -34,4 +34,4 @@ select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT
       return hist;</p>
       
 ![image](https://user-images.githubusercontent.com/103023823/198835653-2afb1fb8-9cbd-4933-92ff-0bb53e05cae4.png)
-Et komplet eksempel og formateret korrekt findes her: https://github.com/MaximusClavius/eloverblikugeforbrug/blob/main/Ugeoversigt%20med%20korrekte%20datoer
+<p>Et komplet eksempel og formateret korrekt findes her: https://github.com/MaximusClavius/eloverblikugeforbrug/blob/main/Ugeoversigt%20med%20korrekte%20datoer</p>
