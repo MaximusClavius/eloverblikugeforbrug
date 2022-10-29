@@ -34,3 +34,4 @@ select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT
       return hist;<br>
 Et komplet eksempel og formateret korrekt findes her: https://github.com/MaximusClavius/eloverblikugeforbrug/blob/main/Ugeoversigt%20med%20korrekte%20datoer
 </p>
+![image](https://user-images.githubusercontent.com/103023823/198835632-dff9e9d7-56ab-4724-af67-35d604709e6f.png)
