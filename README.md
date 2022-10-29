@@ -21,7 +21,7 @@ En løsning på dette er:
   Query skal være følgende:<br>
 select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id) b;<br>
 <b>og husk at angive "state" for "Column"</b><br>
-  Hvis du har valgt at bruge anden database end sqlite, så *skal* Database URL udfyldes selvom der står noget andet.
+  Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes selvom der står noget andet.
 </p>
 <p>Ad 2<br>
   På kortet skal data formateres korrekt og således:<br>
