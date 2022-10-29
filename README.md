@@ -19,3 +19,13 @@ En løsning på dette er:
 <p>Ad 1)<br>
 select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id) b;<br><i>og husk at angive "state" for "Column"</i>
 </p>
+<p>Ad 2<br>
+  På kortet skal data formateres korrekt og således:
+    data_generator: |
+      var new_data = entity.attributes.Data.split(',');
+      var hist = new_data.map((start) => {
+        var element = start.split(': ');
+        return [new Date(element[0]).getTime(), parseFloat(element[1])];
+      });
+      return hist;
+</p>
