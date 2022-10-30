@@ -22,7 +22,7 @@ select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT
 <b>og husk at angive "state" for "Column"</b><br>
   Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes selvom der står noget andet.
 </p>
-Når det lykkes vil sensoren hedde det samme som det navn du gav den ifm. SQL-integrationen.
+<p>Når det lykkes vil sensoren hedde det samme som det navn du gav den ifm. SQL-integrationen.</p>
 ![image](https://user-images.githubusercontent.com/103023823/198866404-38320c49-6592-4b06-9f05-2f490d5b6f8d.png)
 
 
