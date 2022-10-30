@@ -22,8 +22,8 @@ select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT
 <b>og husk at angive "state" for "Column"</b><br>
 Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes selvom der står noget andet.</p>
 <p>Når det lykkes vil sensoren hedde det samme som det navn du gav den ifm. SQL-integrationen.</p>
-![image](https://user-images.githubusercontent.com/103023823/198866568-91de85d5-47ed-4246-b98e-8954adaf7464.png)
-<br>
+![image](https://user-images.githubusercontent.com/103023823/198866640-c0d61ea5-4296-47ab-8e72-4b83b86ebb3d.png)
+<br><br>
 <p>Ad 2<br>
   På kortet skal data formateres korrekt og således:<br>
     data_generator: |<br>
