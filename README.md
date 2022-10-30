@@ -19,9 +19,9 @@ Datoen passer ikke, og det skyldes at HA bruger last_updated frem for den korrek
   Der skal tilføjes en SQL-integration - Indstillinger > Enheder og tjenester > Tilføj integration (nedre højre hjørne) og søg på SQL. Jeg har valgt navnet "eloverblik historik", hvilket betyder jeg får en sensor som hedder: sensor.eloverblik_historik.<br>
   Query skal være følgende:<br>
   Sqlite kender ikke nøgleordet: "separator", så det skal ersattes med et komma.<br>
-### Sqlite
+<h3>Sqlite</h3>
 select group_concat(Dato, ': ', state, ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id) b;<br>
-### MariaDB/MySQL
+<h4>MariaDB/MySQL</h4>
 select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id) b;<br>
 <b>og husk at angive "state" for "Column"</b><br>
 Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes selvom der står noget andet.</p>
