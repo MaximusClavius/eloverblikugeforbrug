@@ -25,7 +25,6 @@ Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database U
 
 ![image](https://user-images.githubusercontent.com/103023823/198866640-c0d61ea5-4296-47ab-8e72-4b83b86ebb3d.png)
 
-<br><br>
 <p>Ad 2<br>
   På kortet skal data formateres korrekt og således:<br>
     data_generator: |<br>
