@@ -20,11 +20,10 @@ Datoen passer ikke, og det skyldes at HA bruger last_updated frem for den korrek
   Query skal være følgende:<br>
 select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id) b;<br>
 <b>og husk at angive "state" for "Column"</b><br>
-  Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes selvom der står noget andet.<br>
-  Når det lykkes vil sensoren hedde det samme som det navn du gav den ifm. SQL-integrationen.
-</p>
+Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes selvom der står noget andet.</p>
+<p>Når det lykkes vil sensoren hedde det samme som det navn du gav den ifm. SQL-integrationen.</p>
 ![image](https://user-images.githubusercontent.com/103023823/198866568-91de85d5-47ed-4246-b98e-8954adaf7464.png)
-
+<br>
 <p>Ad 2<br>
   På kortet skal data formateres korrekt og således:<br>
     data_generator: |<br>
