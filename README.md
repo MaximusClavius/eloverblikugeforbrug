@@ -33,7 +33,9 @@ Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database U
   På kortet skal data formateres korrekt og således:<br>
     data_generator: |<br>
       var new_data = entity.attributes.Data.split(',');<br>
-      var hist = new_data.map((start) => {<br>
+        if (isNaN(new_data[new_data.length - 1][0]))<br>
+	        new_data.pop();<br>
+        var hist = new_data.map((start) => {<br>
         var element = start.split(': ');<br>
         return [new Date(element[0]).getTime(), parseFloat(element[1])];<br>
       });<br>
