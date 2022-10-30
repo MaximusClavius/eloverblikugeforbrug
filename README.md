@@ -31,7 +31,7 @@ Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database U
 
 <p>Ad 2<br>
   På kortet skal data formateres korrekt og således:<br>
-    <p style="font-family: Arial">data_generator: |<br>
+    <p style="font-family: Times New Roman">data_generator: |<br>
       var new_data = entity.attributes.Data.split(',');<br>
         if (isNaN(new_data[new_data.length - 1][0]))<br>
 	        new_data.pop();<br>
