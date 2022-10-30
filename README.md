@@ -15,7 +15,7 @@ For mere historik på diagrammet ændres "graph_span", fx 10d. Af ukendte årsag
 Datoen passer ikke, og det skyldes at HA bruger last_updated frem for den korrekt metering_date på sensor.eloverblik_energy_total. Får at få fandt på den korrekt dato(metering_date), så er en løsning på dette:
 1) at lave en SQL integration
 2) at lave en data_generator på apexcharts-card
-<p>Ad 1)<br>
+<p>Ad 1<br>
   Der skal tilføjes en SQL-integration - Indstillinger > Enheder og tjenester > Tilføj integration (nedre højre hjørne) og søg på SQL. Jeg har valgt navnet "eloverblik historik", hvilket betyder jeg får en sensor som hedder: sensor.eloverblik_historik.<br>
   Query skal være følgende:<br>
 select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id) b;<br>
