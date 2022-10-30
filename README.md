@@ -23,7 +23,7 @@ select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT
   Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes selvom der står noget andet.
 </p>
 Når det lykkes vil sensoren hedde det samme som det navn du gav den ifm. SQL-integrationen.<br>
-![image](https://user-images.githubusercontent.com/103023823/198866470-26774ae9-1a69-4e98-b9a2-72848d203eca.png)
+![image](https://user-images.githubusercontent.com/103023823/198866491-a2f63e4b-043c-4f8d-be03-5d033bbe7783.png)
 
 <p>Ad 2<br>
   På kortet skal data formateres korrekt og således:<br>
