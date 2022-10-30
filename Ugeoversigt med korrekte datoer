@@ -26,6 +26,8 @@ series:
     type: column
     data_generator: |
       var new_data = entity.attributes.Data.split(',');
+      if (isNaN(new_data[new_data.length - 1][0]))
+        new_data.pop();
       var hist = new_data.map((start) => {
         var element = start.split(': ');
         return [new Date(element[0]).getTime(), parseFloat(element[1])];
