@@ -22,7 +22,7 @@ Datoen passer ikke, og det skyldes at HA bruger last_updated frem for den korrek
 <h4>Sqlite</h4>
 SELECT group_concat(Dato || ': ' || state, ',') AS Data, state from (SELECT substr(shared_attrs, instr(shared_attrs, '":"') + 3, instr(shared_attrs, '","') - instr(shared_attrs, '":"') - 3) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id ORDER BY state_id ASC) b;<br>
 <h4>MariaDB/MySQL</h4>
-select group_concat(Dato, ': ', state separator ',') AS Data, state from (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state <> 'unknown' AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id ORDER BY state_id ASC) b;<br>
+SELECT GROUP_CONCAT(Dato, ': ', state SEPARATOR ',') AS Data, state FROM (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state NOT IN ('unavailable','unknown','none') AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id ORDER BY state_id ASC) b;<br>
 <br><b>og husk at angive "state" for "Column"</b><br>
 Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes.</p>
 <p>Når det lykkes vil sensoren hedde det samme som det navn du gav den ifm. SQL-integrationen. Egenskaben "Data:" er historikken.</p>
