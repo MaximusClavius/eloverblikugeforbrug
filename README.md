@@ -43,3 +43,5 @@ Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database U
       
 ![image](https://user-images.githubusercontent.com/103023823/198835653-2afb1fb8-9cbd-4933-92ff-0bb53e05cae4.png)
 <p>Et komplet eksempel og formateret korrekt findes her: https://github.com/MaximusClavius/eloverblikugeforbrug/blob/main/Ugeoversigt%20med%20korrekte%20datoer</p>
+
+<a href="https://www.paypal.com/donate/?hosted_button_id=NNUF56TVFMJXY"><img src="https://www.paypalobjects.com/da_DK/DK/i/btn/btn_donateCC_LG.gif" alt="Doner en skræv"></a>
