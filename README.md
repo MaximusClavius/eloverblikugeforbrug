@@ -28,7 +28,7 @@ SELECT group_concat(Dato || ': ' || state, ',') AS Data, state from (SELECT subs
 <h4>MariaDB/MySQL</h4>
 SELECT GROUP_CONCAT(Dato, ': ', state SEPARATOR ',') AS Data, state FROM (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state NOT IN ('unavailable','unknown','none') AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id ORDER BY state_id ASC) b;<br>
 <br><b>og husk at angive "state" for "Column"</b><br>
-Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes.</p>
+Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes. Eksempelvis</p>
 
 ![image](https://user-images.githubusercontent.com/103023823/216801941-54a1e5b0-41d4-4f09-bd62-fe088f6c0604.png)
 
