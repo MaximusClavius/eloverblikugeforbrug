@@ -16,7 +16,11 @@ Datoen passer ikke, og det skyldes at HA bruger last_updated frem for den korrek
 1) at lave en SQL integration
 2) at lave en data_generator på apexcharts-card
 <p>Ad 1<br>
-  Der skal tilføjes en SQL-integration - Indstillinger > Enheder og tjenester > Tilføj integration (nedre højre hjørne) og søg på SQL. Jeg har valgt navnet "eloverblik historik", hvilket betyder jeg får en sensor som hedder: sensor.eloverblik_historik. Hvis du ikke ved hvilken database du bruger, så er HA født med sqlite.</p>
+  Der skal tilføjes en SQL-integration - Indstillinger > Enheder og tjenester > Tilføj integration (nedre højre hjørne) og søg på SQL.
+
+![image](https://user-images.githubusercontent.com/103023823/216801712-beae43a9-4751-4380-8e5a-97a551423684.png)
+
+ Jeg har valgt navnet "eloverblik historik", hvilket betyder jeg får en sensor som hedder: sensor.eloverblik_historik. Hvis du ikke ved hvilken database du bruger, så er HA født med sqlite.</p>
   Query skal være følgende:<br>
   Sqlite kender ikke nøgleordet: "separator", så det skal ersattes med et komma.<br>
 <h4>Sqlite</h4>
@@ -25,6 +29,9 @@ SELECT group_concat(Dato || ': ' || state, ',') AS Data, state from (SELECT subs
 SELECT GROUP_CONCAT(Dato, ': ', state SEPARATOR ',') AS Data, state FROM (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(shared_attrs, '","', 1), '":"', -1) AS Dato, state FROM states s, state_attributes a WHERE entity_id = 'sensor.eloverblik_energy_total' AND state NOT IN ('unavailable','unknown','none') AND s.attributes_id = a.attributes_id GROUP BY s.attributes_id ORDER BY state_id ASC) b;<br>
 <br><b>og husk at angive "state" for "Column"</b><br>
 Hvis du har valgt at bruge anden database end sqlite, så <b>skal</b> Database URL udfyldes.</p>
+
+![image](https://user-images.githubusercontent.com/103023823/216801941-54a1e5b0-41d4-4f09-bd62-fe088f6c0604.png)
+
 <p>Når det lykkes vil sensoren hedde det samme som det navn du gav den ifm. SQL-integrationen. Egenskaben "Data:" er historikken.</p>
 
 ![image](https://user-images.githubusercontent.com/103023823/198866640-c0d61ea5-4296-47ab-8e72-4b83b86ebb3d.png)
