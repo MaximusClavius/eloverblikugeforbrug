@@ -1,0 +1,58 @@
+    - name: current_tariff_fee
+      state: >-
+        {% set s = {
+            "trans_nettarif": 0.058,
+            "systemtarif": 0.054,
+            "balancetarif_forbrug": 0,
+            "pso_tarif": 0.00,
+            "elafgift_fuld": 0.723,
+            "elafgift_nedsat": 0.008,
+            "nettarif_c_time_vinter_2023": (0.1212, 0.3635, 1.0905),
+            "nettarif_c_time_sommer_2023": (0.1212, 0.1818, 0.4726),
+            "abonnement_net": 0.036,
+            "spotpristillaeg": 0.04,
+            "eltillaeg_ellev": 0.00,
+            "abonnement_ellev": 0.00,
+            "varmepumpe": false,
+        } %}
+        {# varmepumpe = true/false, altid med små bogstaver og pr. måned #}
+        {% set now = now() %}
+        {% set elafgift = s.elafgift_fuld %}
+        {% if now.month <= 6 %}
+          {% set elafgift = s.elafgift_nedsat %}
+        {% endif %}
+        {% if s.varmepumpe and (states('sensor.accumulate_month') | float(334.1)) > 334 %}
+          {% set elafgift = s.elafgift_nedsat %}
+        {% endif %}
+        {% set subscription = s.abonnement_net + s.spotpristillaeg + s.eltillaeg_ellev + s.abonnement_ellev %}
+        {# efter 1. januar 2023 - ny prisstruktur #}
+        {% if now.month >= 4 and now.month <= 9 %}
+          {# Sommer 2023 #}
+          {% if now.hour < 6 %}
+            {# lavlast #}
+            {% set tariff = s.trans_nettarif + s.systemtarif + s.balancetarif_forbrug + s.pso_tarif + elafgift + s.nettarif_c_time_sommer_2023[0] %}
+          {% elif now.hour >= 17 and now.hour <= 20 %}
+            {# spidslast #}
+            {% set tariff = s.trans_nettarif + s.systemtarif + s.balancetarif_forbrug + s.pso_tarif + elafgift + s.nettarif_c_time_sommer_2023[2] %}
+          {% else %}
+            {# hoejlast #}
+            {% set tariff = s.trans_nettarif + s.systemtarif + s.balancetarif_forbrug + s.pso_tarif + elafgift + s.nettarif_c_time_sommer_2023[1] %}
+          {% endif %}
+        {% else %}
+          {# Vinter 2023 #}
+          {% if now.hour < 6 %}
+            {# lavlast #}
+            {% set tariff = s.trans_nettarif + s.systemtarif + s.balancetarif_forbrug + s.pso_tarif + elafgift + s.nettarif_c_time_vinter_2023[0] %}
+          {% elif now.hour >= 17 and now.hour <= 20 %}
+            {# spidslast #}
+            {% set tariff = s.trans_nettarif + s.systemtarif + s.balancetarif_forbrug + s.pso_tarif + elafgift + s.nettarif_c_time_vinter_2023[2] %}
+          {% else %}
+            {# hoejlast #}
+            {% set tariff = s.trans_nettarif + s.systemtarif + s.balancetarif_forbrug + s.pso_tarif + elafgift + s.nettarif_c_time_vinter_2023[1] %}
+          {% endif %}
+        {% endif %}
+        {{ tariff + subscription }}
+      attributes:
+        friendly_name: "Current tariff and fees for power price from Vores Elnet"
+      icon: mdi:cash
+      unit_of_measurement: kr/kWh
